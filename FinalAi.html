@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Final Exam</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+    }
+
+    .quiz-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .quiz-header {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: white;
+        padding: 1rem;
+        background-color: #2563eb;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .controls {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        background-color: #2563eb;
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+        background-color: #1e40af;
+        box-shadow: 0 2px 8px rgba(37,99,235,0.3);
+    }
+
+    .question {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .question:hover {
+        transform: translateX(5px);
+        border-color: #2563eb;
+    }
+
+    .question h3 {
+        margin-bottom: 1rem;
+        font-size: 1.1rem;
+        color: #1f2937;
+    }
+
+    .options label {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        margin: 0.8rem 0;
+        background: #f8fafc;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+	gap: 10px;
+    }
+
+    .options label:hover {
+        background: #e2e8f0;
+        transform: scale(1.02);
+    }
+
+    .options input[type="radio"] {
+        margin-left: 1rem;
+        transform: scale(1.2);
+    }
+
+    .answer-box {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 5px;
+        display: none;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .correct {
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+
+    .incorrect {
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+        .btn {
+            width: 100%;
+            margin: 0.5rem 0;
+        }
+    }
+</style>
+
+
+
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-header">
+            AI Final Exam
+        </div>
+        <div class="controls">
+            <button class="btn" onclick="resetQuiz()">Reset</button>
+            <button class="btn" onclick="showAllAnswers()">Show All Answers</button>
+            <button class="btn" onclick="hideAllAnswers()">Hide All Answers</button>
+
+        </div>
+
+        <!-- Questions Start Here -->
+        <div class="question">
+            <h3>1. Which of the following is a drawback of Local Search algorithms?</h3>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) They always find the global optimum</label>
+                <label><input type="radio" name="q1" value="b"> b) They can get stuck in local optima</label>
+                <label><input type="radio" name="q1" value="c"> c) They require large amounts of labeled data</label>
+                <label><input type="radio" name="q1" value="d"> d) They do not use heuristics</label>
+            </div>
+            <div class="answer-box" id="answer1" data-correct-answer="b">Correct Answer: b) They can get stuck in local optima</div>
+        </div>
+
+        <div class="question">
+            <h3>2. Which of the following fields contribute to the development of AI?</h3>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) Computer Science</label>
+                <label><input type="radio" name="q2" value="b"> b) Mathematics and Statistics</label>
+                <label><input type="radio" name="q2" value="c"> c) Psychology and Linguistics</label>
+                <label><input type="radio" name="q2" value="d"> d) All of the above</label>
+            </div>
+            <div class="answer-box" id="answer2" data-correct-answer="d">Correct Answer: d) All of the above</div>
+        </div>
+
+	<div class="question">
+    <h3>3. The PEAS framework consists of Performance Measure, Environment, Actuators, and Sensors.</h3>
+    <div class="options">
+        <label><input type="radio" name="q3" value="a"> a) True</label>
+        <label><input type="radio" name="q3" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer3" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>4. Uninformed search algorithms do not use any problem-specific knowledge.</h3>
+    <div class="options">
+        <label><input type="radio" name="q4" value="a"> a) True</label>
+        <label><input type="radio" name="q4" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer4" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>5. What is the purpose of the heuristic function ℎ(𝑛) in the A* algorithm?</h3>
+    <div class="options">
+        <label><input type="radio" name="q5" value="a"> a) It represents the actual cost from the start node to 𝑛.</label>
+        <label><input type="radio" name="q5" value="b"> b) It estimates the cost from node 𝑛 to the goal.</label>
+        <label><input type="radio" name="q5" value="c"> c) It represents the total cost of the path.</label>
+        <label><input type="radio" name="q5" value="d"> d) It determines the number of steps to reach the goal.</label>
+    </div>
+    <div class="answer-box" id="answer5" data-correct-answer="b">Correct Answer: b) It estimates the cost from node 𝑛 to the goal.</div>
+</div>
+
+<div class="question">
+    <h3>6. Which of the following local search techniques involves swapping two cities in the Travelling Salesman Problem?</h3>
+    <div class="options">
+        <label><input type="radio" name="q6" value="a"> a) Swap Algorithm</label>
+        <label><input type="radio" name="q6" value="b"> b) Simulated Annealing</label>
+        <label><input type="radio" name="q6" value="c"> c) Hill Climbing</label>
+        <label><input type="radio" name="q6" value="d"> d) Genetic Algorithm</label>
+    </div>
+    <div class="answer-box" id="answer6" data-correct-answer="a">Correct Answer: a) Swap Algorithm</div>
+</div>
+
+<div class="question">
+    <h3>7. Goal-based agents always choose actions based on maximizing a utility function.</h3>
+    <div class="options">
+        <label><input type="radio" name="q7" value="a"> a) True</label>
+        <label><input type="radio" name="q7" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer7" data-correct-answer="b">Correct Answer: b) False</div>
+</div>
+
+<div class="question">
+    <h3>8. Which of the following is NOT a type of intelligent agent?</h3>
+    <div class="options">
+        <label><input type="radio" name="q8" value="a"> a) Simple Reflex Agent</label>
+        <label><input type="radio" name="q8" value="b"> b) Model-Based Reflex Agent</label>
+        <label><input type="radio" name="q8" value="c"> c) Random Agent</label>
+        <label><input type="radio" name="q8" value="d"> d) Learning Agent</label>
+    </div>
+    <div class="answer-box" id="answer8" data-correct-answer="c">Correct Answer: c) Random Agent</div>
+</div>
+
+<div class="question">
+    <h3>9. Which of the following best describes a use case for Teachable Machine in AI?</h3>
+    <div class="options">
+        <label><input type="radio" name="q9" value="a"> a) Reinforcement Learning</label>
+        <label><input type="radio" name="q9" value="b"> b) Training image classification models easily</label>
+        <label><input type="radio" name="q9" value="c"> c) Text generation</label>
+        <label><input type="radio" name="q9" value="d"> d) Genetic Algorithm-based training</label>
+    </div>
+    <div class="answer-box" id="answer9" data-correct-answer="b">Correct Answer: b) Training image classification models easily</div>
+</div>
+
+<div class="question">
+    <h3>10. In the Travelling Salesman Problem (TSP), the goal is to minimize the total travel cost while visiting each city exactly once.</h3>
+    <div class="options">
+        <label><input type="radio" name="q10" value="a"> a) True</label>
+        <label><input type="radio" name="q10" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer10" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>11. Which AI technique is commonly used in search engines for retrieving relevant results?</h3>
+    <div class="options">
+        <label><input type="radio" name="q11" value="a"> a) Reinforcement Learning</label>
+        <label><input type="radio" name="q11" value="b"> b) Information Retrieval & Ranking Algorithms</label>
+        <label><input type="radio" name="q11" value="c"> c) Genetic Programming</label>
+        <label><input type="radio" name="q11" value="d"> d) Bayesian Networks</label>
+    </div>
+    <div class="answer-box" id="answer11" data-correct-answer="b">Correct Answer: b) Information Retrieval & Ranking Algorithms</div>
+</div>
+
+<div class="question">
+    <h3>12. Which of the following learning methods involves AI learning from experience through rewards and penalties?</h3>
+    <div class="options">
+        <label><input type="radio" name="q12" value="a"> a) Supervised Learning</label>
+        <label><input type="radio" name="q12" value="b"> b) Unsupervised Learning</label>
+        <label><input type="radio" name="q12" value="c"> c) Reinforcement Learning</label>
+        <label><input type="radio" name="q12" value="d"> d) General AI Training</label>
+    </div>
+    <div class="answer-box" id="answer12" data-correct-answer="c">Correct Answer: c) Reinforcement Learning</div>
+</div>
+
+<div class="question">
+    <h3>13. Which of the following best defines Artificial Intelligence?</h3>
+    <div class="options">
+        <label><input type="radio" name="q13" value="a"> a) A system that follows predefined rules only.</label>
+        <label><input type="radio" name="q13" value="b"> b) A branch of computer science that enables machines to mimic human intelligence.</label>
+        <label><input type="radio" name="q13" value="c"> c) A robot that can perform manual labor.</label>
+        <label><input type="radio" name="q13" value="d"> d) A programming language used for automation.</label>
+    </div>
+    <div class="answer-box" id="answer13" data-correct-answer="b">Correct Answer: b) A branch of computer science that enables machines to mimic human intelligence.</div>
+</div>
+
+<div class="question">
+    <h3>14. AI as a concept dates back to the 1950s when Alan Turing posed the question, "Can machines think?"</h3>
+    <div class="options">
+        <label><input type="radio" name="q14" value="a"> a) True</label>
+        <label><input type="radio" name="q14" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer14" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>15. What is the main goal of Local Search in optimization problems?</h3>
+    <div class="options">
+        <label><input type="radio" name="q15" value="a"> a) Find an exact solution</label>
+        <label><input type="radio" name="q15" value="b"> b) Improve an existing solution iteratively</label>
+        <label><input type="radio" name="q15" value="c"> c) Perform a breadth-first search</label>
+        <label><input type="radio" name="q15" value="d"> d) Use reinforcement learning</label>
+    </div>
+    <div class="answer-box" id="answer15" data-correct-answer="b">Correct Answer: b) Improve an existing solution iteratively</div>
+</div>
+
+<div class="question">
+    <h3>16. Which of the following best describes the role of the PEAS framework?</h3>
+    <div class="options">
+        <label><input type="radio" name="q16" value="a"> a) It defines the components of an intelligent agent.</label>
+        <label><input type="radio" name="q16" value="b"> b) It is a search algorithm used in AI.</label>
+        <label><input type="radio" name="q16" value="c"> c) It is a type of neural network.</label>
+        <label><input type="radio" name="q16" value="d"> d) It is used for designing machine learning models.</label>
+    </div>
+    <div class="answer-box" id="answer16" data-correct-answer="a">Correct Answer: a) It defines the components of an intelligent agent.</div>
+</div>
+
+<div class="question">
+    <h3>17. An intelligent agent must always have learning capabilities.</h3>
+    <div class="options">
+        <label><input type="radio" name="q17" value="a"> a) True</label>
+        <label><input type="radio" name="q17" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer17" data-correct-answer="b">Correct Answer: b) False</div>
+</div>
+
+<div class="question">
+    <h3>18. The Turing Test is used to determine whether a machine exhibits intelligent behavior equivalent to that of a human.</h3>
+    <div class="options">
+        <label><input type="radio" name="q18" value="a"> a) True</label>
+        <label><input type="radio" name="q18" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer18" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>19. Which of the following is an example of an informed search algorithm?</h3>
+    <div class="options">
+        <label><input type="radio" name="q19" value="a"> a) Breadth-First Search</label>
+        <label><input type="radio" name="q19" value="b"> b) Depth-First Search</label>
+        <label><input type="radio" name="q19" value="c"> c) A* Algorithm</label>
+        <label><input type="radio" name="q19" value="d"> d) Uniform Cost Search</label>
+    </div>
+    <div class="answer-box" id="answer19" data-correct-answer="c">Correct Answer: c) A* Algorithm</div>
+</div>
+
+<div class="question">
+    <h3>20. In the A* algorithm, the cost function is represented as 𝑓(𝑛) = 𝑔(𝑛) + ℎ(𝑛).</h3>
+    <div class="options">
+        <label><input type="radio" name="q20" value="a"> a) True</label>
+        <label><input type="radio" name="q20" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer20" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>21. Weak AI is also called Narrow AI, whereas General AI refers to AI with human-like reasoning and learning abilities.</h3>
+    <div class="options">
+        <label><input type="radio" name="q21" value="a"> a) True</label>
+        <label><input type="radio" name="q21" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer21" data-correct-answer="b">Correct Answer: b) True</div>
+</div>
+
+<div class="question">
+    <h3>22. What is a prompt?</h3>
+    <p>A prompt is any input you provide to a generative model to produce a desired output.  
+    You can think of it as an instruction you provide to the model.  
+    For example:  
+    <ul>
+        <li>Write a small paragraph describing your favorite holiday destination.</li>
+        <li>Write HTML code to generate a dropdown selection of cities within an online form.</li>
+    </ul>
+    These are straightforward prompts used to produce a specific output.</p>
+    <div class="options">
+        <label><input type="radio" name="q22" value="a"> a) True</label>
+        <label><input type="radio" name="q22" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer22" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+
+<div class="question">
+    <h3>23. A prompt is any input or ______ that helps generative AI models produce relevant and logical responses.</h3>
+    <div class="options">
+        <label><input type="radio" name="q23" value="a"> a) Tracer</label>
+        <label><input type="radio" name="q23" value="b"> b) Signal</label>
+        <label><input type="radio" name="q23" value="c"> c) Series of instructions</label>
+        <label><input type="radio" name="q23" value="d"> d) Stimulus</label>
+    </div>
+    <div class="answer-box" id="answer23" data-correct-answer="c">Correct Answer: c) Stimulus</div>
+</div>
+
+<div class="question">
+    <h3>24. Prompt engineering is the process of designing effective prompts.</h3>
+    <div class="options">
+        <label><input type="radio" name="q24" value="a"> a) True</label>
+        <label><input type="radio" name="q24" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer24" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>25. Fuzzy logic is based on the theory of fuzzy sets, which is a generalization of the classical set theory.</h3>
+    <div class="options">
+        <label><input type="radio" name="q25" value="a"> a) True</label>
+        <label><input type="radio" name="q25" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer25" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>26. In fuzzy logic, fuzzy reasoning, also known as approximate reasoning, is based on fuzzy rules that are expressed in natural language using linguistic variables.</h3>
+    <div class="options">
+        <label><input type="radio" name="q26" value="a"> a) True</label>
+        <label><input type="radio" name="q26" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer26" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>27. The concept of the membership function is used to define fuzzy systems in natural language, coupling fuzzy logic with linguistic variables.</h3>
+    <div class="options">
+        <label><input type="radio" name="q27" value="a"> a) True</label>
+        <label><input type="radio" name="q27" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer27" data-correct-answer="a">Correct Answer: a) True</div>
+</div>
+
+<div class="question">
+    <h3>28. All the rules of a fuzzy system are called the decision matrix.</h3>
+    <div class="options">
+        <label><input type="radio" name="q28" value="a"> a) True</label>
+        <label><input type="radio" name="q28" value="b"> b) False</label>
+    </div>
+    <div class="answer-box" id="answer28" data-correct-answer="a">Correct Answer: a) False</div>
+</div>
+
+
+<div class="question">
+    <h3>29. Which type of machine learning relies on providing an algorithm with a set of rules and constraints and letting it learn how to achieve its goals?</h3>
+    <div class="options">
+        <label><input type="radio" name="q29" value="a"> a) Supervised learning</label>
+        <label><input type="radio" name="q29" value="b"> b) Unsupervised learning</label>
+        <label><input type="radio" name="q29" value="c"> c) Transfer learning</label>
+        <label><input type="radio" name="q29" value="d"> d) Reinforcement learning</label>
+    </div>
+    <div class="answer-box" id="answer29" data-correct-answer="d">Correct Answer: d) Reinforcement learning</div>
+</div>
+
+<div class="question">
+    <h3>30. Choose the statement that correctly defines deep learning.</h3>
+    <div class="options">
+        <label><input type="radio" name="q30" value="a"> a) A set of simple algorithms for data analysis</label>
+        <label><input type="radio" name="q30" value="b"> b) A technique for unsupervised learning</label>
+        <label><input type="radio" name="q30" value="c"> c) A type of data preprocessing</label>
+        <label><input type="radio" name="q30" value="d"> d) A specialized subset of machine learning</label>
+    </div>
+    <div class="answer-box" id="answer30" data-correct-answer="d">Correct Answer: d) A specialized subset of machine learning</div>
+</div>
+
+<div class="question">
+    <h3>31. Which of the following categories of machine learning uses a reward function to penalize bad actions or reward good actions?</h3>
+    <div class="options">
+        <label><input type="radio" name="q31" value="a"> a) Neural networks</label>
+        <label><input type="radio" name="q31" value="b"> b) Reinforcement learning</label>
+        <label><input type="radio" name="q31" value="c"> c) Regression model</label>
+        <label><input type="radio" name="q31" value="d"> d) Supervised learning</label>
+    </div>
+    <div class="answer-box" id="answer31" data-correct-answer="b">Correct Answer: b) Reinforcement learning</div>
+</div>
+
+
+
+
+
+	
+
+        <!-- Continue adding all 32 questions in same format -->
+
+        <div class="question">
+            <h3>32. Which type of machine learning involves training an algorithm on labeled data?</h3>
+            <div class="options">
+                <label><input type="radio" name="q32" value="a"> a) Supervised learning</label>
+                <label><input type="radio" name="q32" value="b"> b) Unsupervised learning</label>
+                <label><input type="radio" name="q32" value="c"> c) Transfer learning</label>
+                <label><input type="radio" name="q32" value="d"> d) Reinforcement learning</label>
+            </div>
+            <div class="answer-box" id="answer32" data-correct-answer="a">Correct Answer: a) Supervised learning</div>
+        </div>
+    </div>
+
+    <script>
+        function resetQuiz() {
+            const radioButtons = document.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.checked = false);
+
+            const answerBoxes = document.querySelectorAll('.answer-box');
+            answerBoxes.forEach(box => {
+                box.style.display = 'none';
+                box.classList.remove('correct', 'incorrect');
+                const correctAnswer = box.getAttribute('data-correct-answer');
+                if (correctAnswer) {
+                    box.textContent = `Correct Answer: ${box.dataset.correctAnswer}`;
+                }
+            });
+        }
+
+        function showAllAnswers() {
+            const answerBoxes = document.querySelectorAll('.answer-box');
+            answerBoxes.forEach(box => {
+                box.style.display = 'block';
+                box.classList.add('correct');
+                const correctAnswer = box.getAttribute('data-correct-answer');
+                if (correctAnswer) {
+                    box.textContent = `Correct Answer: ${box.dataset.correctAnswer}`;
+                }
+            });
+        }
+
+        function hideAllAnswers() {
+            const answerBoxes = document.querySelectorAll('.answer-box');
+            answerBoxes.forEach(box => {
+                box.style.display = 'none';
+                box.classList.remove('correct', 'incorrect');
+            });
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const questionNumber = e.target.name.substring(1);
+                const answerBox = document.getElementById(`answer${questionNumber}`);
+                const correctAnswer = answerBox.getAttribute('data-correct-answer');
+                const userAnswer = e.target.value;
+
+                if (userAnswer === correctAnswer) {
+                    answerBox.textContent = "Correct!";
+                    answerBox.classList.add('correct');
+                    answerBox.classList.remove('incorrect');
+                } else {
+                    answerBox.textContent = `Incorrect. Correct Answer: ${answerBox.dataset.correctAnswer}`;
+                    answerBox.classList.add('incorrect');
+                    answerBox.classList.remove('correct');
+                }
+                answerBox.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
